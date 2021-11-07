@@ -1,0 +1,416 @@
+/* Reset CSS */ 
+/* Common */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: Arial, Helvetica, sans-serif;
+    /* Tất cả phần tử nào có text sẽ được kế thừa kiểu chữ trên */
+}
+/* .clear{
+    clear: both;
+} dùng để cha ôm trọn con= cách thêm 1 thẻ div 
+    có class="clear" ở cuối nó
+*/
+
+.text-white{
+    color: #fff!important; /* !important- mạnh nhất- sẽ ưu tiên dùng nó */
+}
+.text-center{
+    text-align:center!important ;
+}
+.margin-right-8{
+    margin-right: 8px! important;
+}
+.margin-right-20{
+    margin-right: 20px !important;
+}
+.margin-top-32{
+    margin-top: 32px!important;
+}
+.margin-top-16{
+    margin-top: 16px!important;
+}
+.margin-top-8{
+    margin-top: 8px!important;
+}
+.text-space-line{
+    line-height: 1.6;
+    
+}
+.row{
+    margin-left: -8px;
+    margin-right: -8px;
+}
+.row::after{
+    /* Giải quyết vấn đề không ôm trọn phần tử con
+        thêm một thẻ giả
+    */
+    content: ""; /* bắt buộc phải có trong before, after */
+    clear: both;
+    display: block;
+}
+.col{
+    padding: 0 8px;
+    font-size: 15px;
+    float:left;
+}
+
+.col-full{
+    width: 100%;
+}
+.col-second{
+    width: 50%;
+}
+.col-third{
+    width: 33.33333%;
+}
+
+
+
+/* Start CSS header */
+#header{
+    height:46px;
+    background-color: #000;
+    position: fixed; /* đưa toàn bộ header nổi lên bám dính ở trên màn hình */
+    left:0;
+    right: 0;
+    top: 0;
+    /* header sẽ có tọa độ left,right, left như trên so với màn hình */
+    z-index: 1;
+    /* x: ngang; y: dọc; z: độ cao(sâu). 
+    ở đây chưa có phần tử nào xét độ cao nên =1 là cao nhất
+    nên header sẽ nổi lên trên cùng và không bị phần tử nào che khi trượt lên xuống
+    */
+}
+
+#nav, .subnav, .month-tour{
+    list-style-type: none;      /* xóa dấu chấm đầu dòng của ul-li */
+}
+#nav > li{
+    display: inline-block; /* có khối ăn theo cha nó là #nav, nav theo header=46px */
+}
+#nav li{
+     
+    position: relative;
+}
+#nav .css-icon{
+    font-size: 12px;
+}
+#nav .subnav{
+    display: none;
+    top: 100%;
+    left:0;
+    /* xét cho phần subnav cách trên, cách trái của cha li là 46px và 0px */
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;  /* chiều dài nhỏ nhất 160px */
+    box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Tạo bóng đổ */
+
+}
+#nav{
+    display: inline-block;
+}
+#nav .subnav a{
+    color:#000;
+    padding: 0  12px;
+    line-height: 38px;
+}    
+
+#nav > li > a{
+    /* Thẻ a là con trực tiếp của li và li là con trực tiếp của #nav */
+    color:#fff;
+    text-transform: uppercase;  /* viết in hoa */
+}
+#nav li a{
+    /* Tất cả các thẻ a thỏa mãn là con li và li là con nav, khác với con trực tiếp */
+    text-decoration: none;   /* Tắt gạch chân */
+    line-height: 46px;  /*áp dụng cho chữ để căn giữa chữ theo chiều dọc, ở đây = 46px= header sẽ nằm giữa header */
+    padding: 0 24px;
+    display: block; /* vì a chưa có khối nên xét khối cho a bằng với cha là li */
+}
+#nav li:hover .subnav{   /* up CSS cho subnav khi hover vào li là con của nav */
+    display: block;
+}
+#nav > li:hover > a,/* up CSS cho a(là con trực tiếp của li) khi hover vào li là con trực tiếp của nav */
+#nav .subnav > li:hover > a{  
+    color:#000;
+    background-color: #ccc;
+}
+#header .search-button{
+    float: right;
+
+}
+#header .search-icon{
+    color:#fff;
+    font-size: 12px;
+    line-height: 46px;
+    padding: 0 20px;
+}
+#header .search-button:hover{
+    background-color:#f44336 ;
+    color:#fff;
+    cursor: pointer;  /* thay con trỏ chuột thành bàn tay nhấn */
+}
+
+/* Start CSS slider */
+#slider{
+    margin-top: 46px;  /* Do header nổi lên trên nên slider sẽ dùng cả vị trí của header, cách 46px để không bị che */
+    padding-top: 50%;  /* tạo thêm cho paddingtop dầy lên bằng đúng 50% chiều ngang chính nó */
+    background: url("/accset/img/slider1/theband/chicago.jpg")top center /cover no-repeat;
+    position: relative;
+}
+#slider .text-content{
+    position:absolute;
+    bottom: 0;
+    color: #fff;
+    padding: 32px 0;
+    width: 100%;
+
+    /* Cách căn giữa khác, bỏ width đi và phải có position */
+    /*  left:50%;   Đẩy cả phần này sang phải 50%  
+    transform: translate(-50%);  Đẩy tất cả phtử trong nó sang trái 50% bề ngang chính nó */
+   
+}
+#slider .text-content-header{
+    font-weight: 500;  /* độ dày chữ */
+}
+#slider .text-content-des{
+    margin: 15px 0;
+}
+
+/* Start CSS content */
+
+/* Start CSS content-selection */
+#content .content-section{
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;  /* Căn giữa cả khối content-section  */
+    padding: 64px 16px;
+}
+#content .content-section-heading{
+    height:44px;
+    margin: 10px 0;
+    font-size: 30px;
+    letter-spacing: 4px;  /* cách xa chữ nhau */
+}
+#content .content-section-subheading{
+    font-size: 15px;
+    margin: 15px 0;
+    font-style: italic;   /* chữ nghiêng */
+    opacity: 0.6;
+
+}
+#content .text-content{
+    font-size: 15px; 
+    margin: 15px 0;
+    text-align: justify;  /* Căn đều 2 bên */
+    line-height: 1.4;   /* khoảng cách các dòng */
+}
+
+
+
+
+#content .member-name{
+    margin: 15px 0;
+}
+.member-image{
+    width: 154px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+/* end CSS content-selection */
+/* Start CSS tour */
+.tour{
+    background-color: #000;
+    
+}
+
+.month-tour{
+    border: 1px solid #fff;
+    max-width: 766px;
+    background-color: #fff;
+    margin-top: 40px;
+}
+
+.month-tour .item-month-tour{
+    font-size: 15px;
+    color: #757575;;
+    padding:11px 16px;
+    border-bottom: 1px solid #ddd;
+}
+.month-tour .sold-out{
+    background-color: #f44336;
+    margin: 0 16px;
+    padding: 0 8px;
+    color: #fff;
+}
+.month-tour .quantity{
+    background-color: #000;
+    float: right;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    line-height: 24px;
+    color: #fff;
+    margin-top: -3px;
+}
+
+
+.tour-img{
+    width: 100%;
+    display: block;
+}
+.tour-content{
+    background-color: #fff;
+    padding: 16px;
+}
+.tour-address{
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.tour-time{
+    margin-bottom: 15px;
+    color: #757575;
+}
+.tour-description{
+    line-height: 1.4;
+}
+.tour-buy{
+    background-color: #000;
+    color:#fff;
+    text-decoration: none;
+    padding:10px 16px;
+    display: inline-block;
+    margin-top: 16px;
+    border:none;
+}
+.tour-buy:hover{
+    background-color: #ccc;
+    color: #000;
+}
+/* Start CSS Contact */
+.input-name-mail{
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    
+}
+.button-send{
+    margin-top: 16px;
+    margin-right: 8px;
+    float:right;
+    padding:12px 16px;
+    border: none;
+    background-color: #000;
+    color:#fff
+}
+
+
+/* Start footer */
+#footer{
+
+}
+
+.modal-ticket{
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    right:0;
+    left: 0;
+    top: 0;
+    bottom:0;   /* tạo lớp phủ toàn màn hình */
+    z-index: 2;
+    /* 3 dong dưới để căn giữa cho item modal-content */
+    display:none;
+    align-items: center;
+    justify-content: center; 
+   
+    animation: modal-animation 0.5s;
+}
+.modal-ticket.open{
+    display: flex;
+
+}
+.modal-content{
+    width: 900px;
+    max-width: calc(100% - 100px);
+    /* khi giảm độ rộng trình duyệt thì width giữ được khoảng cách và không chạm lề */
+    background-color: #fff;
+    min-height: 200px;
+    position: relative;
+}
+.modal-x-icon{
+    position: absolute;
+    right:0;
+    color:#fff;
+    padding:16px;
+
+}
+.modal-x-icon:hover{
+    background-color: #ccc;
+    color:#000;
+    cursor: pointer;
+}
+
+.modal-header{
+    background-color: #009688;
+    height: 128px;
+    font-size: 30px;
+    line-height: 128px;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 4px;
+    
+}
+
+.modal-body{
+    padding: 16px;
+    font-size: 15px;
+}
+.modal-body-item{
+    display: block;
+    margin-bottom: 12px;
+}
+
+.modal-input{
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 24px;
+}
+.modal-button{
+    background-color: #009688;
+    width: 100%;
+    padding: 16px 0;
+    color:#fff;
+    font-weight: 600;
+    border:none;
+
+}
+.modal-button:hover{
+    background-color: #ccc;
+    color:#000;
+    cursor: pointer;
+}
+
+.modal-footer{
+    float:right;
+    margin-bottom: 24px;
+}
+.footer-help{
+    color:#009688;
+}
+/* Tạo một animation hiệu ứng trượt xuống và từ từ rõ lên */
+@keyframes modal-animation{
+    from{
+        transform: translateY(-150px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
