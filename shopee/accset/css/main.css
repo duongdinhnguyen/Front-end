@@ -1,0 +1,126 @@
+/* Start class CSS common */
+.margin-l-8{
+    margin-left: 0.8rem;
+}
+.margin-r-8{
+    margin-right: 0.8rem;
+}
+/* end Common */
+
+/* Start CSS header */
+.header{
+    background-image: linear-gradient(180deg, #f53d2d, #f63);
+    position:fixed;
+    height: 120px;
+    z-index: 100;
+    width: 100%;
+}
+.header_nav{
+    display: flex;
+    justify-content: space-between;
+    line-height: 3.4rem;
+    font-size: 1.3rem;
+    color:var(--white-color);
+}
+.list_item{
+    display: inline-block;
+    margin: 0 8px;
+    position: relative;
+}
+.list_item a{
+    text-decoration: none;
+    color: var(--white-color);
+}
+.list_item a:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+/* Phần tử giả làm phân cách | */
+.list_item--saperating::after{
+    content: "";
+    position: absolute;
+    height: 1.6rem;
+    border: 1px solid #f86c5c;
+    margin-left: 0.8rem;
+
+    top: 50%; /* Dịch xuống 50% so với cha */
+    transform: translateY(-50%);
+    /* Dịch lên trên 50% chính nó -> giúp căn giữa nó */
+}
+.download-show:hover .download_app{
+    display: block;
+}
+.download_app{
+    height: 24rem;
+    width: 18rem;
+    position:absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    border-radius: 0.5rem;
+    box-shadow: 0.1rem 0.2rem 0.1rem #000;
+}
+.download_app .QR_code{
+    width: 100%;
+}
+.download_app .store{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.download_app .store .store_app{
+   width: 40%;
+   margin-bottom: 0.8rem;
+}
+.show-notification:hover .notification{
+    display: block;
+}
+.notification{
+    display: none;
+    height:35rem;
+    width: 40rem;
+    position:absolute;
+    top: 100%;
+    right:0;
+    border-radius: 0.2rem;
+    box-shadow: -0.1rem 0.2rem 0.3rem #ccc;
+    color:var(--text-color);
+    background-color: #fff;
+}
+
+.user_nologin{
+    height: 31rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.user_img{
+    width: 10rem;
+}
+.user_img img{
+    width: 100%;
+}
+.login-signup{
+    line-height: 4rem;
+    display: flex;
+    text-align: center;
+    justify-content:space-evenly;
+    font-size: 1.4rem;
+    background-color:#f5f5f5;
+}
+.login-signup .login-signup-item{
+    width: 50%;
+}
+.login-signup a{
+    color: var(--text-color);
+}
+.login-signup-item:hover {
+    background-color: #e8e8e8;
+}
+.login-signup-item:hover a{
+    color: #ee4d2d;
+}
+/* End CSS header */

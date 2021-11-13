@@ -1,0 +1,29 @@
+:root{
+    --text-color:#858585;
+    --white-color:#fff;
+    --black-color:#000;
+    
+}
+*{
+    box-sizing: inherit; 
+    /* Tất cả các thẻ sẽ kế thừa box-sizing của thẻ chứa nó 
+        Nếu html có box-sizing:border-box thì con nó đều có thuộc tính này
+    */
+}
+html{
+    font-size: 62.5%; /* =10px-> Nếu muốn con nó = 12px dùng 1.2 rem, có tác dụng dễ tính cho dev*/
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+.grid{
+    width: 1200px;
+    margin: 0 auto; /* Căn giữa khối này khi nằm trong một khối khác */
+}
+.grid__full-width{
+    width: 100%;
+}
+.grid__row{
+    display: flex;
+    flex-wrap: wrap;
+}
