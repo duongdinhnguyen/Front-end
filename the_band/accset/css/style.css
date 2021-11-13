@@ -43,6 +43,9 @@ html{
 .margin-top-8{
     margin-top: 8px!important;
 }
+.margin-bottom-16{
+    margin-bottom:16px!important;
+}
 .margin-bottom-32{
     margin-bottom: 32px!important;
 }
@@ -50,7 +53,7 @@ html{
     margin-bottom: 64px!important;
 }
 .text-space-line{
-    line-height: 1.6;
+    line-height: 2;
     
 }
 .row{
@@ -103,7 +106,7 @@ html{
     list-style-type: none;      /* xóa dấu chấm đầu dòng của ul-li */
 }
 #nav > li{
-    display: inline-block; /* có khối ăn theo cha nó là #nav, nav theo header=46px */
+    display:inline-block; /* có khối ăn theo cha nó là #nav, nav theo header=46px */
 }
 #nav li{
      
@@ -167,12 +170,24 @@ html{
     color:#fff;
     cursor: pointer;  /* thay con trỏ chuột thành bàn tay nhấn */
 }
+#header .menu-icon{
+    display: none  ;
+    color:#fff;
+    font-size: 12px;
+    line-height: 46px;
+    padding: 0 20px;
+}
+#header .menu-icon:hover{
+    background-color: #ccc;
+    color: #000;
+}
 
 /* Start CSS slider */
 #slider{
     margin-top: 46px;  /* Do header nổi lên trên nên slider sẽ dùng cả vị trí của header, cách 46px để không bị che */
     padding-top: 50%;  /* tạo thêm cho paddingtop dầy lên bằng đúng 50% chiều ngang chính nó */
-    background: url("/accset/img/theband/chicago.jpg")top center /cover no-repeat;
+    background: url("../img/theband/chicago.jpg")top center /cover no-repeat;
+    /* dùng url tương đối */
     position: relative;
 }
 #slider .text-content{
@@ -193,11 +208,15 @@ html{
 #slider .text-content-des{
     margin: 15px 0;
 }
-
+#slider .text-content-header,
+#slider .text-content-des{
+    text-shadow:1px 0 5px #000;
+}
 /* Start CSS content */
 
 /* Start CSS content-selection */
 #content .content-section{
+   
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;  /* Căn giữa cả khối content-section  */
@@ -243,7 +262,7 @@ html{
 
 .month-tour{
     border: 1px solid #fff;
-    max-width: 766px;
+    max-width: 100%;
     background-color: #fff;
     margin-top: 40px;
 }
@@ -306,6 +325,9 @@ html{
     color: #000;
 }
 /* Start CSS Contact */
+#contact a:hover{
+    opacity: 0.5;
+}
 .input-name-mail{
     padding: 10px;
     border: 1px solid #ccc;
@@ -333,14 +355,14 @@ html{
 #footer{
     background-color: #f1f1f1;
     text-align: center;
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
 #footer .social a{
     text-decoration: none;
 }
-#footer .social a:hover{
-    opacity: 0.3;
+#footer a:hover{
+    opacity: 0.5;
     cursor: pointer;
 }
 #footer a{
@@ -348,6 +370,7 @@ html{
 }
 #footer a i{
     font-size: 24px;
+    padding: 8px;
 }
 .modal-ticket{
     background-color: rgba(0,0,0,0.5);
@@ -360,13 +383,13 @@ html{
     /* 3 dong dưới để căn giữa cho item modal-content */
     display:none;
     align-items: center;
-    justify-content: center; 
-   
+    justify-content:center; 
+    
     animation: modal-animation 0.5s;
 }
 .modal-ticket.open{
     display: flex;
-
+    flex-flow: ;
 }
 .modal-content{
     width: 900px;

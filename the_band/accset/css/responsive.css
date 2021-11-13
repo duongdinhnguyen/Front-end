@@ -1,0 +1,93 @@
+/* ghi đè lên các thuộc tính css đã có */
+
+/* UX: các nút để chọn trên mobile, tablet lên để height: 48px
+    để ng dùng dễ dàng thao tác
+*/
+/* Mobile */
+@media (max-width : 739px){
+    #header{
+        overflow: hidden;
+    }
+    #header .search-icon{
+        display: none;
+    }
+    #header .menu-icon{
+        display: block  ;
+        color:#fff;
+        font-size: 12px;
+        line-height: 46px;
+        padding: 0 20px;
+        
+    }
+    #header .btn-menu{
+        position:absolute;
+        top:0;
+        right:0;
+    }
+    
+    #nav > li {
+        display: block;
+    }
+    #nav > li:first-child{
+        display: inline-block;
+    }
+    
+   
+    #nav{
+        display: block;
+    }
+    #nav .subnav{
+        position: initial;
+        /* mặc định */
+    }
+    #nav .subnav a {
+        padding: 6px 48px;
+        background-color: #ddd;
+    }
+    #slider .text-content-header,
+    #slider .text-content-des{
+        display: none;
+    }
+    .button-send,
+    .tour-buy,
+    .col-third, 
+    .col-second {
+        width: 100%!important;
+    }
+    .button-send{
+        margin-right: initial;
+    }
+    #content .content-section{
+        padding: 64px 16px;
+    }
+    #content .text-content{
+        letter-spacing: initial;
+    }
+    .member-image {
+        width: 60%;
+    }
+    .mobile-mt-32{
+        margin-top: 32px;
+    }
+    .mobile-mb-32{
+        margin-bottom: 32px;
+    }
+    .mobile-mb-8{
+        margin-bottom: 8px;
+    }
+    
+}
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px){
+
+}
+/* Mobile and Tablet */
+@media (max-width: 1023px){
+    #nav .subnav a{
+        padding: 5px 12px;
+    }
+    .tour-buy,
+    .button-send{
+        padding:16px;
+    }
+}
