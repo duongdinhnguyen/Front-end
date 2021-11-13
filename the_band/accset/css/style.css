@@ -383,13 +383,12 @@ html{
     /* 3 dong dưới để căn giữa cho item modal-content */
     display:none;
     align-items: center;
-    justify-content:center; 
-    
+    justify-content:center;   
     animation: modal-animation 0.5s;
 }
 .modal-ticket.open{
     display: flex;
-    flex-flow: ;
+  
 }
 .modal-content{
     width: 900px;
