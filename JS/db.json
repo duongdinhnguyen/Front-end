@@ -1,0 +1,26 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "kem dưỡng"
+    },
+    {
+      "name": "quan bò",
+      "id": 2
+    },
+    {
+      "name": "sì líp",
+      "id": 3
+    }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "name": "duong"
+    },
+    {
+      "id": 2,
+      "name": "duongdinhnguyen"
+    }
+  ]
+}

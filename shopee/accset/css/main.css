@@ -5,6 +5,9 @@
 .margin-r-8{
     margin-right: 0.8rem;
 }
+.margin-t-120{
+    margin-top: 12rem;;
+}
 /* end Common */
 
 /* Start CSS header */
@@ -12,8 +15,10 @@
     background-image: linear-gradient(180deg, #f53d2d, #f63);
     position:fixed;
     height: 120px;
-    z-index: 100;
-    width: 100%;
+    z-index: 1;
+    left:0;
+    right: 0;
+    top:0;
 }
 .header_nav{
     display: flex;
@@ -48,6 +53,8 @@
     transform: translateY(-50%);
     /* Dịch lên trên 50% chính nó -> giúp căn giữa nó */
 }
+
+/* QR code download app */
 .download-show:hover .download_app{
     display: block;
 }
@@ -59,8 +66,12 @@
     left: 0;
     display: none;
     border-radius: 0.5rem;
-    box-shadow: 0.1rem 0.2rem 0.1rem #000;
+    border: 1px solid #d3d3d3;
+    box-shadow: 0.1rem 0.2rem 0.1rem var(--black-color);
+    cursor: pointer;
+    z-index: 100;
 }
+
 .download_app .QR_code{
     width: 100%;
 }
@@ -73,6 +84,8 @@
    width: 40%;
    margin-bottom: 0.8rem;
 }
+
+/* Header notification */
 .show-notification:hover .notification{
     display: block;
 }
@@ -84,11 +97,26 @@
     top: 100%;
     right:0;
     border-radius: 0.2rem;
+    border: 1px solid #d3d3d3;
     box-shadow: -0.1rem 0.2rem 0.3rem #ccc;
     color:var(--text-color);
     background-color: #fff;
+    animation: notify-ani ease-in 0.2s; /* to dần theo tỷ lệ từ 0-> 1 */
+    transform-origin: 90% top; /* Dịch tâm sang gần phải và sát trên */
+    z-index: 100;
 }
 
+/* mũi nhọn trỏ vào notify */
+.notification::before{
+    content: "";
+    border-width: 2rem 3rem;
+    border-style: solid;
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    border-color: transparent transparent #fff transparent;
+    /* 3 phần tam giác của border sẽ trong suốt, còn bottom trắng */
+}
 .user_nologin{
     height: 31rem;
     display: flex;
@@ -109,18 +137,194 @@
     text-align: center;
     justify-content:space-evenly;
     font-size: 1.4rem;
-    background-color:#f5f5f5;
+    background-color: var(--primary-color);
 }
 .login-signup .login-signup-item{
     width: 50%;
 }
 .login-signup a{
     color: var(--text-color);
+    padding: 1.2rem 6.4rem
 }
 .login-signup-item:hover {
     background-color: #e8e8e8;
 }
 .login-signup-item:hover a{
-    color: #ee4d2d;
+    color: var(--hover-color);
 }
+
+/* Header body */
+.header_body{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.6rem;
+}
+.logo_item a{
+    display: flex;
+    text-decoration: none;
+    color: var(--white-color);
+    line-height: 4.2rem;
+}
+.logo_item a i{
+    margin: 0 0.8rem;
+    font-size: 4.2rem;
+}
+.logo_item a p{
+    padding-top:0.6rem;
+    font-size: 3rem;
+    
+}
+.search_item{
+    width: 84rem;
+}
+.search_input{
+    position: relative;
+    border:none;
+}
+.search_input input{
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.4rem;
+    border: none;
+    border-radius: 0.2rem;
+    outline:none;
+    padding:1.2rem;
+}
+.search_item .search_icon{
+    position:absolute;
+    top:0;
+    right:0;
+    line-height: 100%;
+    height: 3.4rem;
+    width: 6rem;
+    background-color: var(--background-color);
+    border:none;
+    border-radius: 0.2rem;
+    color:var(--white-color);
+    margin: 0.3rem ;
+    
+}
+.search_item .search_icon:hover{
+    cursor: pointer;
+    opacity: 0.9;
+}
+.search_suggestions{
+    margin-top: 0.6rem;
+    font-size: 1.2rem;
+    
+}
+.list_suggestions{
+    display: flex;
+}
+.item_suggestion{
+    margin-right: 1.2rem;
+}
+.list_suggestions .item_suggestion a{
+    color: var(--white-color);
+    text-decoration: none;
+}
+
+.select_item{
+    height:5.4rem;
+    width: 13.6rem;
+    display: flex;
+    position: relative;
+}
+.cart{
+    margin: auto;
+}
+.cart .link_cart{
+    color: var(--white-color);
+    font-size: 2.4rem;
+}
+
+.select_item .show_cart{
+    position:absolute;
+    width: 40rem;
+    height:26rem;
+    top:100%;
+    right:30%;
+    box-shadow: 0 0.1rem 1rem #f1ebeb;
+    border: 1px solid var(--border-color);
+    background-color:var(--white-color);
+    display: none;
+    flex-direction: column;
+    animation: notify-ani ease-in 0.2s; /* to dần theo tỷ lệ từ 0-> 1 */
+    transform-origin: 90% top; /* Dịch tâm sang gần phải và sát trên */
+}
+.select_item .show_cart::before{
+    content:"";
+    position: absolute;
+    top:-3rem;
+    right:0.8rem;
+    border-width: 1.8rem 1.6rem;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+    z-index: 2;
+}
+
+.cart:hover ~ .show_cart{
+    display: flex;
+}
+.cart_empty{
+    width: 20rem;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.cart_empty img{
+    width: 50%;
+}
+.cart_empty p{
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Start container CSS */
+.product_item{
+    width: 100%;
+    height: 300px;
+    background-color: rgba(0,0,0,0.02);
+    
+    
+    
+}
+.product_item img{
+    width: 100%;
+    max-height: 200px;
+}
+.product_content{
+    padding: 10px;
+    height:100px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    
+}
+.product_description p{
+    font-size: 12px;
+    color: var(--black-color);
+    line-height: 16px;
+}
+.product_details{
+    display: flex;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-between;
+}
+.product_details .product_price{
+    font-size: 16px;
+    color: var(--background-color);
+}
+.product_details .product_quantity{
+    font-size: 12px;
+    color: var(--text-color);
+}
+/* End container CSS */
+
+
+
 /* End CSS header */
