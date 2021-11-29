@@ -1,0 +1,75 @@
+.main{
+    height: 320px;
+    padding: 12px;
+    position: relative;
+    
+}
+/* Dùng lớp giả để set background-img của main */
+.main::after{
+    content: "";/* không đc thiếu */
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: url("../image/background_img/background_img_004.jpg") top center /cover no-repeat;/* cover: chiều ngang = width */
+    opacity: 0.9;
+    z-index: -1;
+}
+.main-music{
+    width: 351px;
+    
+    z-index: 1;
+
+}
+
+.header-music{
+    display: flex;
+    justify-content: space-between;
+    height : 60px;
+    align-items: center;
+}
+.name-music{
+    text-align: center;
+    font-family: var(--font-text);
+    font-size: var(--font-size);
+}
+.name-music p{
+    color: var(--color-icon);
+}
+.name-music h3{
+    opacity: 0.9;
+}
+
+.cd-music{
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cd-img img{
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 5px #ccc;
+}
+
+.operation-music{
+    height: 60px;
+}
+.operation-music ul{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
+.operation-music ul li{
+    color: var(--color-text);
+    font-size: var(--size-xl);
+}
+.pause-item{
+    color: var(--color-icon)!important;
+    font-size: var(--size-big)!important ;
+}
