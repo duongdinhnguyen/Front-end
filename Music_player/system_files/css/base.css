@@ -9,20 +9,22 @@ https://static.collectui.com/shots/3671744/musicloud-revolutionary-app-for-music
     --size-xl:20px;
     --size-xxl:24px;
     --size-big:42px;
-    --color-text: #ccc;
+    --color-text: rgb(156, 150, 150);
     --color-icon: rgb(240, 74, 99);
-    --font-text: Arial, Helvetica, sans-serif;
+    --font-text: 'Source Serif Pro' , sans-serif;
+    --background-color: rgba(197, 188, 188, 0.2);
+    --white-color: #fff;
+    --black-color: #000;
 }
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 html{
     box-sizing: inherit;
 }
-.body{
-    box-sizing: border-box;
-}
+
 .icon{
     font-size: 20px;
     color: var(--color-icon);
