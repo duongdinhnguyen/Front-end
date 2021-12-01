@@ -74,14 +74,10 @@ var songs = [
 function show_Song(){
     var play_list = document.querySelector(".music-lists");
 
-    console.log(play_list);
-    songs.forEach((song)=>{
-        console.log(song.singer_image);
-    });
     var html = songs.reduce((initialValue, song)=>{
         return initialValue + `<li class="music-item">
                     <div class="music-item-content">
-                        <div class="music-item-img" style='background: url("${song.singer_image}")top center /cover no-repeat;'>
+                        <div class="music-item-img" style='background-image: url("${song.singer_image}");'>
 
                         </div>
                         <div class="music-item-description">
@@ -97,4 +93,30 @@ function show_Song(){
     play_list.innerHTML = html;
     
 }
-show_Song()
+//zoom out CD when scroll: use window.scrollY or document.documentElement.scrollTop to get Y-axis browser
+function handleEventScroll(){
+    var cd_Music = document.querySelector(".cd-music");    
+    var cd_Height = cd_Music.offsetHeight; 
+
+    // var cd_Img = document.querySelector(".cd-img");
+    document.onscroll = function(){
+        var scrollY= window.scrollY || document.documentElement.scrollTop;
+        cd_Music.style.height = cd_Height - scrollY +"px";
+        scrollY > 100 ? cd_Music.classList.add("un-active") : cd_Music.classList.remove("un-active");
+        
+        // if(scrollY>100){
+        //     cd_Img.style.height -= (scrollY -100);
+        //     cd_Img.style.width -= (scrollY -100);
+        // }
+        
+    };
+}
+
+function start(){
+    show_Song();
+    handleEventScroll();
+
+}
+
+// Start app
+start();

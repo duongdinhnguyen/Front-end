@@ -1,13 +1,14 @@
+
 .main{
+    
     position: fixed;
     top:0;
-    left:0;
-    right: 0;
     z-index: 1;
-    background: url("../image/background_img/background_img_004.jpg") top center /cover no-repeat;
-    padding: 0 12px;
+    background: url("../image/background_img/background_img_004.jpg")center /cover no-repeat;
+    padding: 0 1.2rem;
     box-shadow: 0 1px 5px 1px rgba(189, 154, 161, 0.5);
     border-radius: 2px;
+    max-width: 73.99rem;
     
 }
 /* Dùng lớp giả để set background-img của main */
@@ -23,8 +24,8 @@
     z-index: -1;
 } */
 .main-music{
-    width: 351px;
-    padding: 12px;
+    width: 35.1rem;
+    padding: 1.2rem;
 
 }
 
@@ -51,18 +52,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.1s ease-out;
 }
 
-.cd-img img{
-    width: 100px;
-    height: 100px;
+.cd-img{
+    width: 10rem;
+    height: 10rem;
+    background: center /cover no-repeat;
+    background-image: url("../image/singer/001.jpg");
     border-radius: 50%;
-    box-shadow: 0 0 20px 5px #ccc;
+    box-shadow: 0 0 4px 2px #000;
+    animation: cd-animation 0.3s ease-out;
+
 }
 
 .operation-music ul{
     height: 40px;
-    width: 327px;
+    width: 32.7rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -74,7 +80,7 @@
 }
 .pause-item{
     color: var(--color-icon)!important;
-    font-size: var(--size-big)!important ;
+    font-size: 32px!important ;
 }
 .audio-music{
     height: 30px;
@@ -90,22 +96,22 @@
 /* CSS musics start */
 .musics{
     margin-top: 354px;
-    width: 375px;
+    width: 37.5rem;
     background-color: var(--background-color);
-    padding: 20px 12px;
+    padding: 2rem 1.2rem;
     
 }
 
 
 .musics .music-item{
-    width: 351px;
+    width: 35.1rem;
     height: 80px;
     background-color: var(--white-color);
     list-style: none;
     margin-bottom: 12px;
     border-radius: 5px;
     box-shadow: 0 0 10px 1px rgba(189, 154, 161, 0.5);
-    padding: 10px 20px;
+    padding: 1rem 2rem;
 }
 .music-item .music-item-content{
     display: flex;
@@ -115,15 +121,17 @@
     justify-content: space-evenly;
 }
 .music-item .music-item-img{
-    width: 52px;
+    width: 5.2rem;
     height: 52px;
-    margin-right: 24px;
+    margin-right: 2.4rem;
     border-radius: 50%;
+    box-shadow: 0 0 4px 2px #000;
+    background:center /cover no-repeat;
 
 }
 
 .music-item .music-item-description{
-    width: 195px;
+    width: 19.5rem;
     font-family: var(--font-text);
     font-weight:400;
 }

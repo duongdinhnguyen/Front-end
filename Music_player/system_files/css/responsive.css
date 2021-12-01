@@ -1,0 +1,8 @@
+@media (max-width: 739px) {
+    
+    body{
+        max-width: 73.99rem;
+        display: flex;
+        justify-content: center;
+    }
+}
