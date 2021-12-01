@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+
     <link rel="stylesheet" href="./system_files/css/base.css">
     <link rel="stylesheet" href="./system_files/css/main.css">
     <link rel="stylesheet" href="./system_files/css/responsive.css">
@@ -32,7 +34,8 @@
                     </div>
                 </div>
                 <div class="cd-music">
-                    <div class="cd-img">
+    
+                    <div class="cd-img" >
                         
                     </div>
                 </div>
@@ -45,8 +48,10 @@
                             <i class="fas fa-step-backward"></i>
                         </li>
                         <li class="operation-item pause-item">
-                            <i class="fas fa-pause-circle"></i>
+                            <i class="fas fa-pause-circle pause"></i>
+                            <i class="fas fa-play-circle play un-active"></i>
                         </li>
+                        
                         <li class="operation-item">
                             <i class="fas fa-step-forward"></i>
                         </li>
@@ -56,34 +61,18 @@
                     </ul>
                 </div>
                 <div class="audio-music">
-                    <div class="audio">
-    
-                    </div>
+                    <input type="range" class="audio-item" min="0" max="100" value="0" step="1">
+                    <audio src="" id="audio"></audio>
                 </div>
             </div>
         </div>
         <div class="musics">
-            <ul class="music-lists">
-                
-                <!-- <li class="music-item">
-                    <div class="music-item-content">
-                        <div class="music-item-img">
-                           
-                        </div>
-                        <div class="music-item-description">
-                            <h3>Trốn tìm</h3>
-                            <p>Đen</p>
-                        </div>
-                        <div class="details">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
-                    </div>
-                </li> -->
-                
+            <ul class="music-lists">          
                 
             </ul>
         </div>
     </div>
     <script src="./system_files/handle/main.js"></script>
+   
 </body>
 </html>
