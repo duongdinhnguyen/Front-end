@@ -72,6 +72,8 @@ var songs = [
 ];
 var initialIndex = 0;
 var isPlay = false; 
+var gr_CD; // sử dụng để quay CD
+var is_Random = false;
 var audio = document.querySelector("#audio");
 var audio_item = document.querySelector("input[type='range']");
 var item_play = document.querySelector(".pause-item");
@@ -81,39 +83,25 @@ var back_song = document.querySelector(".back-song");
 var back_down_song = document.querySelector(".back-down-song");
 var go_up_song = document.querySelector(".go-up-song");
 var random_song = document.querySelector(".random-song");
+var header_songName =  document.querySelector(".name-music h3");
+var cd = document.querySelector(".cd-img");
+var cd_Music = document.querySelector(".cd-music");
+var cd_Height = cd_Music.offsetHeight;
+var play_list = document.querySelector(".music-lists");
 
-// show song inital
+
 function showCD(index){
-    document.querySelector(".name-music h3").textContent = songs[index].song_name;
-    document.querySelector(".cd-img").style.backgroundImage = `url("${songs[index].singer_image}")`;
+    header_songName.textContent = songs[index].song_name;
+    cd.style.backgroundImage = `url("${songs[index].singer_image}")`;
     audio.src = songs[index].song_source;
     
 }
 
-
-function play_CD(){
-    isPlay =false;
-    isPlay ? audio.pause() : audio.play();
-    audio.onplay = function(){
-        isPlay = true;
-        play.classList.add("un-active");
-        pause.classList.remove("un-active");
-
-    }
-    audio.onpause =  function(){
-        play.classList.remove("un-active");
-        pause.classList.add("un-active");
-        isPlay = false;
-    }
-}
-
-
-// show play list music
 function show_Song(){
-    var play_list = document.querySelector(".music-lists");
+    
     var html = ``;
     songs.forEach( (song,index)=>{
-        html += `<li class="music-item" onclick="handleEventClickSong(${index})">
+        html += `<li class="music-item ${index === initialIndex ? 'song-active' : ''}" value = "${index}">
                     <div class="music-item-content">
                         <div class="music-item-img" style='background-image: url("${song.singer_image}");'>
 
@@ -129,157 +117,202 @@ function show_Song(){
                 </li>`;
     });
     play_list.innerHTML = html;
+
     
 }
 
 
-//zoom out CD when scroll: use window.scrollY or document.documentElement.scrollTop to get Y-axis browser
+function go_round_CD(){
+    gr_CD = cd.animate([{ transform: 'rotate(360deg)' }],
+     {duration: 30000,iterations: Infinity}); 
+     // duration: thời lượng, iterations: lặp lại
+    gr_CD.pause(); // mặc định là không xoay
+}
+function audio_Play(){
+    gr_CD.play();
+    play.classList.add("un-active");
+    pause.classList.remove("un-active");
+}
+function audio_Pause(){
+    gr_CD.pause();
+    pause.classList.add("un-active");
+    play.classList.remove("un-active");
+}
+// play CD
+function play_CD(){
+    isPlay = true;
+    audio.play();
+    audio.onplay = audio_Play;
+
+}
+
+
+
+
+
+
 function handleEventScroll(){
-    var cd_Music = document.querySelector(".cd-music");    
-    var cd_Height = cd_Music.offsetHeight; 
-
-    // var cd_Img = document.querySelector(".cd-img");
-    document.onscroll = function(){
-        var scrollY= window.scrollY || document.documentElement.scrollTop;
-        cd_Music.style.height = cd_Height - scrollY +"px";
-        scrollY > 100 ? cd_Music.classList.add("un-active") : cd_Music.classList.remove("un-active");
-        
-        // if(scrollY>100){
-        //     cd_Img.style.height -= (scrollY -100);
-        //     cd_Img.style.width -= (scrollY -100);
-        // }
-        
-    }
+    var scrollY= window.scrollY || document.documentElement.scrollTop;
+    cd_Music.style.height = cd_Height - scrollY +"px";
+    scrollY > 100 ? cd_Music.classList.add("un-active") : cd_Music.classList.remove("un-active"); 
 }
 
 
-// handle event backInitialSong: currentTime =0, audio auto play
+
 function backInitialSong(){
-    back_song.onclick = function(){
-        audio_item.value = 0;
-        audio.currentTime = 0;
-    }
+    audio.currentTime = 0;
+    audio_item.value = 0;
 }
 
-// handle event backdownSong
+
 function back_downSong(){
-    back_down_song.onclick = function(){
-        if(initialIndex > 0){
-            initialIndex -= 1;
-            showCD(initialIndex);
-            play_CD();
-        }
-        else{
-            play_CD();
-        }
+    if(is_Random){
+        initialIndex = Math.floor(Math.random() * songs.length);
+        
     }
+    else{
+        initialIndex > 0 ? initialIndex -= 1: initialIndex = songs.length -1;  
+    }
+
+    showCD(initialIndex);
+    play_CD();
+
+    if(document.querySelector(".song-active")){
+        document.querySelector(".song-active").classList.remove("song-active"); 
+    }
+    document.querySelector(`li[value = '${initialIndex}']`).classList.add("song-active");
+
+    
 }   
 
-// pause/play music
-function handleEventPause(){
-       
-    item_play.onclick = function(){
-        // if(pause.classList.contains("un-active")){
-        //     pause.classList.remove("un-active");
-        //     play.classList.add("un-active");
-        //     audio.play();
-        // }
-        // else{
-        //     pause.classList.add("un-active");
-        //     play.classList.remove("un-active");
-        //     audio.pause();
-        // }
 
-        isPlay ? audio.pause() : audio.play();
-    }
-    audio.onplay = function(){
-        isPlay = true;
-        pause.classList.remove("un-active");
-        play.classList.add("un-active");
-    }
-    audio.onpause = function(){
-        isPlay= false;
-        pause.classList.add("un-active");
-        play.classList.remove("un-active");
-    }
+function handleEventPause(){
+    isPlay = !isPlay;
+    isPlay ? audio.play() : audio.pause();
+    audio.onplay = audio_Play;
+    audio.onpause = audio_Pause;
 }
+
 
 // handle event go_upSong
 function go_upSong(){
-    go_up_song.onclick = function(){
-        if(initialIndex < songs.length -1){
-            initialIndex += 1;
-            showCD(initialIndex);
-            play_CD();
-        }
-        else{
-            play_CD();
-        }
+    
+    if(is_Random){
+        initialIndex = Math.floor(Math.random() * songs.length); 
     }
+    else{
+        initialIndex < songs.length -1 ? initialIndex += 1 : initialIndex = 0;
+    }
+    showCD(initialIndex);
+    play_CD();
+    
+    if(document.querySelector(".song-active")){
+        document.querySelector(".song-active").classList.remove("song-active"); 
+    }
+    document.querySelector(`li[value = '${initialIndex}']`).classList.add("song-active");
+        
 }
 
 // handle event random Song: Math.random() *10 <=> random 0->9 
 function randomSong(){
-    random_song.onclick = function(){
-        initialIndex = Math.floor(Math.random() * songs.length);
-        showCD(initialIndex);
-        play_CD();
-    };
-}
-
-// auto next Song
-function autoNextSong(){
-    audio.onended = function(){
-        if(initialIndex < songs.length -1){
-            initialIndex += 1;
-            showCD(initialIndex);
-            play_CD();
-        }
-        else{
-            play_CD();
-        }
+    
+    is_Random = !is_Random;
+    if(is_Random){
+        this.classList.add("random-active");
     }
+    else {
+        this.classList.remove("random-active");
+    }
+        
+
 }
 
 
 // Khi tiến độ bài hát thay đổi
 function forward(){
     // ontimeupdate: audio chạy thời gian
-    audio.ontimeupdate = function(){
-        // currentTime: time hiện tại, duration: thời lượng audio
-        var result = Math.floor(audio.currentTime/audio.duration *100);
+    // currentTime: time hiện tại, duration: thời lượng audio
+    var result = Math.floor(audio.currentTime/audio.duration *100);
+    audio.currentTime > 0 ? audio_item.value = result : 0;
     
-        audio.currentTime > 0 ? audio_item.value = result : 0;
-    }
 }
-// Khi tua bài hát, dùng onchange để lấy value tại chỗ tua
+
+
+// dùng onchange để lấy value tại chỗ tua
 // từ value=> tính ra số giây tương ứng của bài hát
 // dùng currentTime để set time hiện tại cho audio
 function tuaSong(){
-    audio_item.onchange = function(event){
-        // console.log(event.target.value*audio.duration/100);
-        audio.currentTime = event.target.value*audio.duration/100;
-    };
+    audio.currentTime = audio_item.value*audio.duration/100;
     
 }
-function handleEventClickSong(index){
-    initialIndex = index;
-    showCD(initialIndex);
-    play_CD();
-}
-function start(){
-    show_Song();
-    showCD(initialIndex);
-    handleEventScroll();
-    backInitialSong();
-    back_downSong();
-    handleEventPause();
-    go_upSong();
-    randomSong();
-    forward();
-    tuaSong();
-    autoNextSong();
 
+
+function start(){
+
+    // show song inital
+    showCD(initialIndex);
+
+    // show play list music
+    show_Song();
+
+    //chuyển bài khi click
+    play_list.onclick = function(e){
+        // trả về phần tử phù hợp 
+        var music_item = e.target.closest(".music-item");
+        var details = e.target.closest(".details");
+        // nếu click trúng music_item và không trúng details
+        if(music_item && ! details){
+            
+                initialIndex = music_item.value;
+                showCD(initialIndex);
+                play_CD();
+                if(document.querySelector(".song-active")){
+                document.querySelector(".song-active").classList.remove("song-active"); 
+                }
+    
+                music_item.classList.add("song-active");
+            
+            
+        }
+        // khi click trúng details
+        if(details){
+            console.log("yeag");
+        }
+    };
+
+    //zoom out CD when scroll: use window.scrollY 
+    //or document.documentElement.scrollTop to get Y-axis browser
+    document.onscroll = handleEventScroll;
+
+    // quay CD: use animate 360deg
+    // animate: gồm 2 đối số: keyframes(danh sách keyframe) and time options
+    go_round_CD();
+
+    // handle event backInitialSong: currentTime =0, audio auto play
+    back_song.addEventListener('click', backInitialSong);  
+
+    // handle event backdownSong
+    back_down_song.onclick  = back_downSong;
+
+    // pause/play music
+    item_play.onclick = handleEventPause;
+
+    // handle event go_upSong
+    go_up_song.onclick = go_upSong;
+
+    // handle event random Song: Math.random() *10 <=> random 0->9 
+    random_song.onclick = randomSong;
+
+    // Khi tiến độ bài hát thay đổi
+    audio.ontimeupdate = forward;
+
+    // Khi tua bài hát
+    audio_item.onchange = tuaSong;
+
+    // auto next Song
+    audio.onended  = go_upSong;
+
+    
 }
 
 // Start app

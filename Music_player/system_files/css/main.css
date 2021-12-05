@@ -80,6 +80,9 @@
     color: var(--color-icon)!important;
     font-size: 32px!important ;
 }
+.random-active{
+    color :aqua !important ;
+}
 .audio-music{
     height: 30px;
     display: flex;
@@ -87,15 +90,15 @@
 }
 .audio-music .audio-item{
     width: 100%;
-    height: 5px;
+    height: 8px;
     -webkit-appearance: none;
     background: var(--background-color);
     
 }
 .audio-music .audio-item::-webkit-slider-thumb {
     appearance: none;
-    width: 5px;
-    height: 5px;
+    width: 8px;
+    height: 8px;
     background: #04AA6D;
     cursor: pointer;
   }
@@ -119,6 +122,9 @@
     border-radius: 5px;
     box-shadow: 0 0 10px 1px rgba(189, 154, 161, 0.5);
     padding: 1rem 2rem;
+}
+.song-active{
+    background-color: bisque !important ;
 }
 .music-item .music-item-content{
     display: flex;
