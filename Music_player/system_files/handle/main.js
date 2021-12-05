@@ -70,25 +70,50 @@ var songs = [
         song_source: "./system_files/songs/010.mp3"
     }
 ];
-var initialValue = 0;
+var initialIndex = 0;
+var isPlay = false; 
 var audio = document.querySelector("#audio");
 var audio_item = document.querySelector("input[type='range']");
+var item_play = document.querySelector(".pause-item");
+var pause = document.querySelector(".pause");
+var play = document.querySelector(".play");
+var back_song = document.querySelector(".back-song");
+var back_down_song = document.querySelector(".back-down-song");
+var go_up_song = document.querySelector(".go-up-song");
+var random_song = document.querySelector(".random-song");
 
 // show song inital
-function showCD(indexValue){
-    document.querySelector(".name-music h3").textContent = songs[initialValue].song_name;
-    document.querySelector(".cd-img").style.backgroundImage = `url("${songs[initialValue].singer_image}")`;
-    audio.src = songs[initialValue].song_source;
-    //console.log(document.querySelector("#audio").src);
-    
+function showCD(index){
+    document.querySelector(".name-music h3").textContent = songs[index].song_name;
+    document.querySelector(".cd-img").style.backgroundImage = `url("${songs[index].singer_image}")`;
+    audio.src = songs[index].song_source;
     
 }
+
+
+function play_CD(){
+    isPlay =false;
+    isPlay ? audio.pause() : audio.play();
+    audio.onplay = function(){
+        isPlay = true;
+        play.classList.add("un-active");
+        pause.classList.remove("un-active");
+
+    }
+    audio.onpause =  function(){
+        play.classList.remove("un-active");
+        pause.classList.add("un-active");
+        isPlay = false;
+    }
+}
+
+
 // show play list music
 function show_Song(){
     var play_list = document.querySelector(".music-lists");
-
-    var html = songs.reduce((initialValue, song)=>{
-        return initialValue + `<li class="music-item" onclick="handleEventClick()">
+    var html = ``;
+    songs.forEach( (song,index)=>{
+        html += `<li class="music-item" onclick="handleEventClickSong(${index})">
                     <div class="music-item-content">
                         <div class="music-item-img" style='background-image: url("${song.singer_image}");'>
 
@@ -102,10 +127,12 @@ function show_Song(){
                         </div>
                     </div>
                 </li>`;
-    },``);
+    });
     play_list.innerHTML = html;
     
 }
+
+
 //zoom out CD when scroll: use window.scrollY or document.documentElement.scrollTop to get Y-axis browser
 function handleEventScroll(){
     var cd_Music = document.querySelector(".cd-music");    
@@ -124,16 +151,34 @@ function handleEventScroll(){
         
     }
 }
-function handleEventClick(){
-    console.log("Bat dc roi nha");
+
+
+// handle event backInitialSong: currentTime =0, audio auto play
+function backInitialSong(){
+    back_song.onclick = function(){
+        audio_item.value = 0;
+        audio.currentTime = 0;
+    }
 }
+
+// handle event backdownSong
+function back_downSong(){
+    back_down_song.onclick = function(){
+        if(initialIndex > 0){
+            initialIndex -= 1;
+            showCD(initialIndex);
+            play_CD();
+        }
+        else{
+            play_CD();
+        }
+    }
+}   
+
 // pause/play music
 function handleEventPause(){
-    var pause_item = document.querySelector(".pause-item");
-    var pause = document.querySelector(".pause");
-    var play = document.querySelector(".play");
-    var isPlay = false;
-    pause_item.onclick = function(){
+       
+    item_play.onclick = function(){
         // if(pause.classList.contains("un-active")){
         //     pause.classList.remove("un-active");
         //     play.classList.add("un-active");
@@ -145,12 +190,7 @@ function handleEventPause(){
         //     audio.pause();
         // }
 
-        if(isPlay){
-            audio.pause();
-        }
-        else {
-            audio.play();
-        }
+        isPlay ? audio.pause() : audio.play();
     }
     audio.onplay = function(){
         isPlay = true;
@@ -163,21 +203,82 @@ function handleEventPause(){
         play.classList.remove("un-active");
     }
 }
+
+// handle event go_upSong
+function go_upSong(){
+    go_up_song.onclick = function(){
+        if(initialIndex < songs.length -1){
+            initialIndex += 1;
+            showCD(initialIndex);
+            play_CD();
+        }
+        else{
+            play_CD();
+        }
+    }
+}
+
+// handle event random Song: Math.random() *10 <=> random 0->9 
+function randomSong(){
+    random_song.onclick = function(){
+        initialIndex = Math.floor(Math.random() * songs.length);
+        showCD(initialIndex);
+        play_CD();
+    };
+}
+
+// auto next Song
+function autoNextSong(){
+    audio.onended = function(){
+        if(initialIndex < songs.length -1){
+            initialIndex += 1;
+            showCD(initialIndex);
+            play_CD();
+        }
+        else{
+            play_CD();
+        }
+    }
+}
+
+
 // Khi tiến độ bài hát thay đổi
 function forward(){
-    
+    // ontimeupdate: audio chạy thời gian
     audio.ontimeupdate = function(){
+        // currentTime: time hiện tại, duration: thời lượng audio
         var result = Math.floor(audio.currentTime/audio.duration *100);
     
         audio.currentTime > 0 ? audio_item.value = result : 0;
     }
 }
+// Khi tua bài hát, dùng onchange để lấy value tại chỗ tua
+// từ value=> tính ra số giây tương ứng của bài hát
+// dùng currentTime để set time hiện tại cho audio
+function tuaSong(){
+    audio_item.onchange = function(event){
+        // console.log(event.target.value*audio.duration/100);
+        audio.currentTime = event.target.value*audio.duration/100;
+    };
+    
+}
+function handleEventClickSong(index){
+    initialIndex = index;
+    showCD(initialIndex);
+    play_CD();
+}
 function start(){
     show_Song();
-    showCD();
+    showCD(initialIndex);
     handleEventScroll();
+    backInitialSong();
+    back_downSong();
     handleEventPause();
+    go_upSong();
+    randomSong();
     forward();
+    tuaSong();
+    autoNextSong();
 
 }
 
