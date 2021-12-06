@@ -1,0 +1,15 @@
+/* Reset CSS */
+
+*{
+    padding: 0;
+    margin : 0;
+    box-sizing: border-box;
+    
+}
+:root{
+    --color-border-input: rgb(187, 222, 243);
+    --color-border: rgb(40, 120, 240);
+}
+html{
+    font-size: 62.5%;
+}

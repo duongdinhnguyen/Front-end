@@ -4,9 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./accset/css/main.css">
+    <link rel="stylesheet" href="./accset/css/base.css">
+
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="form-register">
+        <form action="" class="form">
+            <div class="form-main">
+                <div class="form-name">
+                    <h3 class="form-title">Biểu mẫu đăng kí</h3>
+                    <p class="form-title-description">Vui lòng nhập đầy đủ thông tin</p>
+                </div>
+                
+                <div class="form-element">
+                    <label for="user-name" class="form-element-description">Tên đăng nhập:</label>
+                    <input id="user-name" type="text" class="form-element-input">
+                    <span class="form-element-errorNotification"></span>
+                </div>
+                <div class="form-element">
+                    <label for="email" class="form-element-description">Email:</label>
+                    <input id="email" type="text" class="form-element-input">
+                    <span class="form-element-errorNotification"></span>
+                </div>
+                <div class="form-element">
+                    <label for="password" class="form-element-description">Mật khẩu:</label>
+                    <input id="password" type="text" class="form-element-input">
+                    <span class="form-element-errorNotification"></span>
+                </div>
+                <div class="form-element">
+                    <label for="retype-password" class="form-element-description">Nhập lại mật khẩu:</label>
+                    <input id="retype-password" type="text" class="form-element-input">
+                    <span class="form-element-errorNotification"></span>
+                </div>
+                <div class="element-submit">
+                    <button class="submit" type="submit">Đăng kí</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="./accset/handle/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,65 @@
+/* 
+1. create form 
+2. CSS form
+3. use event onblur
+*/
+.form-register{
+    position: fixed;
+    top:0;
+    right:0;
+    left:0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    padding: 3rem;
+    border: 1px solid #000;
+}
+.form-main{
+    width: 360px;
+}
+.form-name{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.form-name h3{
+    font-size: 2rem;
+}
+.form-name p{
+    font-size: 1rem;
+}
+.form-element{
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+}
+.form-element-input{
+    width: 100%;
+    padding: 0.4rem;
+    outline: none;
+}
+
+.form-element-input:focus{
+    outline:1px solid var(--color-border-input);
+    border: 1px solid var(--color-border-input);
+    border-radius: 2px;
+}
+.element-submit{
+    display: flex;
+    justify-content: center;
+}
+.submit{
+    padding: 0.6rem 1.6rem;
+    border: 1px solid var(--color-border);
+    background-color:var(--color-border-input) ;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.submit:hover{
+    opacity: 0.9;
+}
