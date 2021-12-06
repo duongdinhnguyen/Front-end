@@ -256,8 +256,13 @@ function start(){
     show_Song();
 
     //chuyển bài khi click
+    // bắt event khi click element nằm trong thẻ bọc nó
+    // dùng cách này thì sẽ bắt đc toàn bộ các element trong nó
+    // kể cả các element sau khi chỉnh sửa, update, add, remove,..
     play_list.onclick = function(e){
-        // trả về phần tử phù hợp 
+        
+        //e.target => trả về hiện tại
+        // trả về phần tử có class là gì đó
         var music_item = e.target.closest(".music-item");
         var details = e.target.closest(".details");
         // nếu click trúng music_item và không trúng details
