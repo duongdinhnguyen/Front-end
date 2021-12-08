@@ -9,7 +9,16 @@
 :root{
     --color-border-input: rgb(187, 222, 243);
     --color-border: rgb(40, 120, 240);
+    --color-error: #d24d36;
 }
 html{
     font-size: 62.5%;
+}
+.input-error{
+    border: 1px solid var(--color-error);
+    border-radius: 3px;
+}
+.input-success{
+    border-radius: 3px;
+    border: 1px solid rgb(66, 245, 50);
 }
