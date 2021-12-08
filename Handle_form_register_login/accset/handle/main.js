@@ -1,7 +1,10 @@
+
 var error_notification = "*Chưa điền thông tin";
 var list_input = document.querySelectorAll(".form-element-input");
+var btn_submit = document.querySelector("button[type='submit']");
 var value_password ="";
-function checkInput(item, callback){
+var listForm =[];
+function checkInput(item, callback,index){
     var error_Element = item.parentElement.querySelector(".form-element-errorNotification");
     // xóa thông báo lỗi khi đang nhập dữ liệu
     item.oninput = function(){
@@ -25,6 +28,11 @@ function checkInput(item, callback){
             // kiểm tra đúng định dang chưa
             callback(this, error_Element, value_password);
         }
+
+        // truyền data vào mảng
+        listForm[index] ={value: item.value};
+            
+        
     }
 }
 // Đúng định dạng text
@@ -68,6 +76,8 @@ function passwordInput(item, error_Element){
     }
     
 }
+
+// Kiểm tra retype-password với password
 function passwordRetypeInput(item, error_Element, value_email){
     var errorRetype = "*Không đúng password";
     if(String(item.value) === String(value_email) ){
@@ -82,19 +92,39 @@ function passwordRetypeInput(item, error_Element, value_email){
     }
 }
 
-list_input.forEach(item =>{
+// 
+list_input.forEach((item,index) =>{
     
     if(item.id == "user-name" ){
-        checkInput(item, textInput);
+        checkInput(item, textInput, index);
     }
     else if(item.id == "email"){
-        checkInput(item, emailInput);
+        checkInput(item, emailInput, index);
     }
     else if(item.id == "password"){
-        checkInput(item, passwordInput);
+        checkInput(item, passwordInput, index);
     }
     else if(item.id == "retype-password"){
-        checkInput(item, passwordRetypeInput);
+        checkInput(item, passwordRetypeInput, index);
     }
     
 });
+
+
+// handle event click submit form when no input data
+btn_submit.onclick = function(e){
+    e.preventDefault();
+    if(listForm.length <= 0){
+        list_input.forEach(item =>{
+            item.classList.add("input-error");
+            item.parentElement.querySelector("span").innerText = error_notification;
+        });
+    }
+    else{
+        // Lấy được data khi nhập
+        console.log(listForm);
+    }
+}
+
+// handle when submit
+//return data when submit
