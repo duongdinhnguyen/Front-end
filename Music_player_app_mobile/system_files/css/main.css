@@ -1,4 +1,7 @@
-
+.app-player-music{
+    display: flex;
+    justify-content: center;
+}
 .main{
     position: fixed;
     top:0;
